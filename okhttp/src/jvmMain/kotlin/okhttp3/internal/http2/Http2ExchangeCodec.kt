@@ -95,7 +95,7 @@ class Http2ExchangeCodec(
     val stream = stream ?: throw IOException("stream wasn't created")
     val headers = stream.takeHeaders()
     val responseBuilder = readHttp2HeadersList(headers, protocol)
-    return if (expectContinue && responseBuilder.code == HTTP_CONTINUE) {
+    return if (expectContinue && (responseBuilder.code == HTTP_CONTINUE || responseBuilder.code == 102) {
       null
     } else {
       responseBuilder

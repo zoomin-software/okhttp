@@ -184,7 +184,7 @@ class Http1ExchangeCodec(
           .headers(headersReader.readHeaders())
 
       return when {
-        expectContinue && statusLine.code == HTTP_CONTINUE -> {
+        expectContinue && (statusLine.code == HTTP_CONTINUE || statusLine.code == 102) -> {
           null
         }
         statusLine.code == HTTP_CONTINUE -> {
